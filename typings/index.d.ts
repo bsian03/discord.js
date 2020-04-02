@@ -789,6 +789,14 @@ declare module 'discord.js' {
 		public toString(): string;
 	}
 
+  export class Intents extends BitField<IntentsString> {
+    public static FLAGS: Record<IntentsString, number>;
+    public static PRIVILEGED: number;
+    public static ALL: number;
+    public static NON_PRIVILEGED: number;
+    public static resolve(bit?: BitFieldResolvable<IntentsString>): number;
+  }
+
 	export class Message {
 		constructor(channel: TextChannel | DMChannel | GroupDMChannel, data: object, client: Client);
 		private _edits: Message[];
@@ -2411,7 +2419,7 @@ declare module 'discord.js' {
 	type WebSocketOptions = {
 		large_threshold?: number;
 		compress?: boolean;
-		intents?: Intents | number;
+		intents?: BitFieldResolvable<IntentsString> | number;
 	};
 
 	type WSEventType = 'READY'
