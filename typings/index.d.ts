@@ -1832,7 +1832,6 @@ declare module 'discord.js' {
 		restWsBridgeTimeout?: number;
 		restTimeOffset?: number;
 		retryLimit?: number;
-		disabledEvents?: WSEventType[];
 		ws?: WebSocketOptions;
 		http?: HTTPOptions;
 	};
@@ -2050,6 +2049,23 @@ declare module 'discord.js' {
 		id: string;
 		number: string;
 	}
+
+	type IntentsString =
+    | 'GUILDS'
+    | 'GUILD_MEMBERS'
+    | 'GUILD_BANS'
+    | 'GUILD_EMOJIS'
+    | 'GUILD_INTEGRATIONS'
+    | 'GUILD_WEBHOOKS'
+    | 'GUILD_INVITES'
+    | 'GUILD_VOICE_STATES'
+    | 'GUILD_PRESENCES'
+    | 'GUILD_MESSAGES'
+    | 'GUILD_MESSAGE_REACTIONS'
+    | 'GUILD_MESSAGE_TYPING'
+    | 'DIRECT_MESSAGES'
+    | 'DIRECT_MESSAGE_REACTIONS'
+    | 'DIRECT_MESSAGE_TYPING';
 
 	type InviteOptions = {
 		temporary?: boolean;
@@ -2395,6 +2411,7 @@ declare module 'discord.js' {
 	type WebSocketOptions = {
 		large_threshold?: number;
 		compress?: boolean;
+		intents?: Intents | number;
 	};
 
 	type WSEventType = 'READY'

@@ -6,6 +6,7 @@ const RESTManager = require('./rest/RESTManager');
 const ClientDataManager = require('./ClientDataManager');
 const ClientManager = require('./ClientManager');
 const ClientDataResolver = require('./ClientDataResolver');
+const Intents = require('../util/Intents');
 const ClientVoiceManager = require('./voice/ClientVoiceManager');
 const WebSocketManager = require('./websocket/WebSocketManager');
 const ActionsManager = require('./actions/ActionsManager');
@@ -513,6 +514,9 @@ class Client extends EventEmitter {
    * @private
    */
   _validateOptions(options = this.options) { // eslint-disable-line complexity
+    if (typeof options.ws.intents !== 'undefined') {
+      options.ws.intents = Intents.resolve(options.ws.intents);
+    }
     if (typeof options.shardCount !== 'number' || isNaN(options.shardCount)) {
       throw new TypeError('The shardCount option must be a number.');
     }
@@ -542,7 +546,6 @@ class Client extends EventEmitter {
     if (typeof options.restWsBridgeTimeout !== 'number' || isNaN(options.restWsBridgeTimeout)) {
       throw new TypeError('The restWsBridgeTimeout option must be a number.');
     }
-    if (!(options.disabledEvents instanceof Array)) throw new TypeError('The disabledEvents option must be an Array.');
     if (typeof options.retryLimit !== 'number' || isNaN(options.retryLimit)) {
       throw new TypeError('The retryLimit  options must be a number.');
     }
