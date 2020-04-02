@@ -26,6 +26,10 @@ exports.Package = require('../../package.json');
  * requests (higher values will reduce rate-limiting errors on bad connections)
  * @property {number} [retryLimit=Infinity] How many times to retry on 5XX errors
  * (Infinity for indefinite amount of retries)
+ * @property {WSEventType[]} [disabledEvents] An array of disabled websocket events. Events in this array will not be
+ * processed, potentially resulting in performance improvements for larger bots. Only disable events you are
+ * 100% certain you don't need, as many are important, but not obviously so. The safest one to disable with the
+ * most impact is typically `TYPING_START`.
  * @property {WebsocketOptions} [ws] Options for the WebSocket
  * @property {HTTPOptions} [http] HTTP options
  */
@@ -40,6 +44,7 @@ exports.DefaultOptions = {
   disableEveryone: false,
   sync: false,
   restWsBridgeTimeout: 5000,
+  disabledEvents: [],
   retryLimit: Infinity,
   restTimeOffset: 500,
 

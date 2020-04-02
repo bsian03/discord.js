@@ -546,6 +546,7 @@ class Client extends EventEmitter {
     if (typeof options.restWsBridgeTimeout !== 'number' || isNaN(options.restWsBridgeTimeout)) {
       throw new TypeError('The restWsBridgeTimeout option must be a number.');
     }
+    if (!(options.disabledEvents instanceof Array)) throw new TypeError('The disabledEvents option must be an Array.');
     if (typeof options.retryLimit !== 'number' || isNaN(options.retryLimit)) {
       throw new TypeError('The retryLimit  options must be a number.');
     }

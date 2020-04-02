@@ -1840,7 +1840,8 @@ declare module 'discord.js' {
 		restWsBridgeTimeout?: number;
 		restTimeOffset?: number;
 		retryLimit?: number;
-		ws?: WebSocketOptions;
+    disabledEvents?: WSEventType[];
+    ws?: WebSocketOptions;
 		http?: HTTPOptions;
 	};
 
